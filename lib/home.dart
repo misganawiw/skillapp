@@ -267,12 +267,87 @@ class _originalhomeState extends State<originalhome> {
                 ),
               );
             },
+            leading: const Icon(Icons.list),
+            trailing: const Text(
+              "GFG",
+              style: TextStyle(color: Colors.green, fontSize: 15),
+            ),
             title: Text(
               cat_data[index].cat_name,
-              style: TextStyle(fontSize: 20),
+              //style: TextStyle(fontSize: 20),
             ),
           );
         },
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: const EdgeInsets.all(0),
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ), //BoxDecoration
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.green),
+                accountName: Text(
+                  "Abhishek Mishra",
+                  style: TextStyle(fontSize: 18),
+                ),
+                accountEmail: Text("abhishekm977@gmail.com"),
+                currentAccountPictureSize: Size.square(50),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Color.fromARGB(255, 165, 255, 137),
+                  child: Text(
+                    "A",
+                    style: TextStyle(fontSize: 30.0, color: Colors.blue),
+                  ), //Text
+                ), //circleAvatar
+              ), //UserAccountDrawerHeader
+            ), //DrawerHeader
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text(' My Profile '),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.book),
+              title: const Text(' My Course '),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.workspace_premium),
+              title: const Text(' Go Premium '),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.video_label),
+              title: const Text(' Saved Videos '),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text(' Edit Profile '),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('LogOut'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -322,29 +397,51 @@ class _detailcategoryState extends State<detailcategory> {
           childAspectRatio: 1.5,
         ),
         itemBuilder: (context, index) {
-          return Container(
-            color: Colors.grey[300],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Image.network(
-                  'https://i.ytimg.com/vi/KjgluLOMa0k/maxresdefault.jpg',
-                  fit: BoxFit.cover,
-                ),
-                SizedBox(height: 10.0),
-                Text(
-                  mycatlist.vids[index].metadatas,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => home3(),
+                  // Pass the arguments as part of the RouteSettings. The
+                  // DetailScreen reads the arguments from these settings.
+                  settings: RouteSettings(
+                    arguments: mycatlist.vids[index],
                   ),
                 ),
-              ],
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.elliptical(3, 2)),
+                    color: Color.fromARGB(255, 0, 0, 0)),
+                //color: Colors.grey[300],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // Image.network(
+                    //   'https://i.ytimg.com/vi/KjgluLOMa0k/maxresdefault.jpg',
+                    //   fit: BoxFit.cover,
+                    // ),
+                    SizedBox(height: 10.0),
+                    Text(
+                      mycatlist.vids[index].metadatas,
+                      style: TextStyle(
+                        //fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         },
         itemCount: mycatlist.vids.length,
       ),
+      
     );
   }
 }
