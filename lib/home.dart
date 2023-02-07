@@ -295,26 +295,55 @@ class _detailcategoryState extends State<detailcategory> {
       appBar: AppBar(
         title: const Text('list of vids'),
       ),
-      body: ListView.builder(
-        itemCount: mycatlist.vids.length,
+      // body: ListView.builder(
+      //   itemCount: mycatlist.vids.length,
+      //   itemBuilder: (context, index) {
+      //     return ListTile(
+      //       onTap: () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //             builder: (context) => home3(),
+      //             // Pass the arguments as part of the RouteSettings. The
+      //             // DetailScreen reads the arguments from these settings.
+      //             settings: RouteSettings(
+      //               arguments: mycatlist.vids[index],
+      //             ),
+      //           ),
+      //         );
+      //       },
+      //       title: Text(mycatlist.vids[index].metadatas),
+      //     );
+      //   },
+      // ),
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.5,
+        ),
         itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => home3(),
-                  // Pass the arguments as part of the RouteSettings. The
-                  // DetailScreen reads the arguments from these settings.
-                  settings: RouteSettings(
-                    arguments: mycatlist.vids[index],
+          return Container(
+            color: Colors.grey[300],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.network(
+                  'https://i.ytimg.com/vi/KjgluLOMa0k/maxresdefault.jpg',
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  mycatlist.vids[index].metadatas,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
                   ),
                 ),
-              );
-            },
-            title: Text(mycatlist.vids[index].metadatas),
+              ],
+            ),
           );
         },
+        itemCount: mycatlist.vids.length,
       ),
     );
   }
